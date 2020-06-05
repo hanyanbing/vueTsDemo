@@ -12,7 +12,7 @@
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
     "arrow-parens": false,
-    "semicolon": [true, "always"],
+    "semicolon": false,
     "trailing-comma": [
       true,
       {
