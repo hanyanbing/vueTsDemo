@@ -1,0 +1,8 @@
+尾部是否需要分号， tslint.json
+"semicolon": [
+      false,
+      "always"
+    ],
+
+
+https://segmentfault.com/a/1190000014230857
