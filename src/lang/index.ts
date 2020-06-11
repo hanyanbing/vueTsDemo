@@ -5,9 +5,9 @@ import Cookies from 'js-cookie';
 import elementEnLocale from 'element-ui/lib/locale/lang/en.js'; // element-ui lang
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN.js'; // element-ui lang
 import elementEsLocale from 'element-ui/lib/locale/lang/es.js'; // element-ui lang
-// import enLocale from './en.js'
-// import zhLocale from './zh.js'
-// import esLocale from './es.js'
+// import enLocale from './en';
+import zhLocale from './zh';
+// import esLocale from './es'
 Vue.use(VueI18n);
 
 const messages = {
@@ -16,7 +16,7 @@ const messages = {
     ...elementEnLocale
   },
   zh: {
-    // ...zhLocale,
+    ...zhLocale,
     ...elementZhLocale
   },
   es: {
@@ -44,7 +44,6 @@ export const getLanguage = () => {
   // default value  en
   return 'en';
 };
-
 
 const i18n = new VueI18n({
   // set locale

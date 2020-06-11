@@ -1,12 +1,4 @@
-import user from './user'
-import role from './role'
-import article from './article'
-// import search from './remoteSearch'
+import user from './user';
+import role from './role';
 
-export default [
-  ...user,
-  ...role,
-  ...article
-  // ...search
-]
-
+export default [...user, ...role];

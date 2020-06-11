@@ -1,32 +1,38 @@
-import defaultSettings from '@/settings.ts'
-const { showSettings, tagsView, fixedHeader, sidebarLogo, theme } = defaultSettings
+import Cookies from 'js-cookie';
 
-const state = {
-  theme: theme,
-  showSettings: showSettings,
-  tagsView: tagsView,
-  fixedHeader: fixedHeader,
-  sidebarLogo: sidebarLogo
+interface States {
+  showSettings: boolean;
+  tagsView: boolean;
+  fixedHeader: boolean;
+  sidebarLogo: boolean;
+  siderbarOpen: boolean;
 }
+
+const stateModule: States = {
+  showSettings: true,
+  tagsView: true,
+  fixedHeader: false,
+  sidebarLogo: true,
+  siderbarOpen: false
+};
 
 const mutations = {
-  CHANGE_SETTING: (state, { key, value }) => {
+  CHANGE_SETTING: (state: States, { key, value }) => {
     if (Object.prototype.hasOwnProperty.call(state, key)) {
-      state[key] = value
+      state[key] = value;
     }
   }
-}
+};
 
 const actions = {
-  changeSetting({ commit }, data) {
-    commit('CHANGE_SETTING', data)
+  changeSetting({ commit }, data: object) {
+    commit('CHANGE_SETTING', data);
   }
-}
+};
 
 export default {
   namespaced: true,
-  state,
+  state: stateModule,
   mutations,
   actions
-}
-
+};

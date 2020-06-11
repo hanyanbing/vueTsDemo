@@ -7,8 +7,8 @@ export function isExternal(path) {
 }
 
 export function validUsername(str: string) {
-  const valid_map = ['admin', 'editor'];
-  return valid_map.indexOf(str.trim()) >= 0;
+  const validmap = ['admin', 'editor'];
+  return validmap.indexOf(str.trim()) >= 0;
 }
 
 export function validURL(url) {
@@ -32,7 +32,6 @@ export function validAlphabets(str) {
 }
 
 export function validEmail(email) {
-  // const reg = /^(([^<>()\[\]\.,;:\s@"]+(\.[^<>()\[\]\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   const reg = /^[A-Za-z]+$/;
   return reg.test(email);
 }

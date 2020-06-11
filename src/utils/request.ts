@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth';
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api 的 base_url
   withCredentials: true, // 跨域请求时发送 cookies
-  timeout: 5000, // request timeout
+  timeout: 5000 // request timeout
 });
 
 // request interceptor
@@ -45,7 +45,7 @@ service.interceptors.response.use(
       Message({
         message: res.message,
         type: 'error',
-        duration: 5 * 1000,
+        duration: 5 * 1000
       });
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -57,7 +57,7 @@ service.interceptors.response.use(
           {
             confirmButtonText: '重新登录',
             cancelButtonText: '取消',
-            type: 'warning',
+            type: 'warning'
           }
         ).then(() => {
           store.dispatch('user/resetToken').then(() => {
@@ -75,7 +75,7 @@ service.interceptors.response.use(
     Message({
       message: error.message,
       type: 'error',
-      duration: 5 * 1000,
+      duration: 5 * 1000
     });
     return Promise.reject(error);
   }

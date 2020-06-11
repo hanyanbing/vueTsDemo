@@ -12,7 +12,7 @@ export function parseTime(time, cFormat) {
     date = time;
   } else {
     if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
-      time = parseInt(time);
+      time = parseInt(time, 10);
     }
     if (typeof time === 'number' && time.toString().length === 10) {
       time = time * 1000;
@@ -26,9 +26,9 @@ export function parseTime(time, cFormat) {
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay(),
+    a: date.getDay()
   };
-  const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
+  const timestr = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key];
     // Note: getDay() returns 0 on Sunday
     if (key === 'a') {
@@ -39,16 +39,16 @@ export function parseTime(time, cFormat) {
     }
     return value || 0;
   });
-  return time_str;
+  return timestr;
 }
 
 export function formatTime(time, option) {
   if (('' + time).length === 10) {
-    time = parseInt(time) * 1000;
+    time = parseInt(time, 10) * 1000;
   } else {
     time = +time;
   }
-  const d = new Date(time);
+  const d: any = new Date(time);
   const now = Date.now();
 
   const diff = (now - d) / 1000;
@@ -103,18 +103,23 @@ export function getQueryObject(url) {
 export function byteLength(str) {
   // returns the byte length of an utf8 string
   let s = str.length;
-  for (var i = str.length - 1; i >= 0; i--) {
+  for (let i = str.length - 1; i >= 0; i--) {
     const code = str.charCodeAt(i);
-    if (code > 0x7f && code <= 0x7ff) s++;
-    else if (code > 0x7ff && code <= 0xffff) s += 2;
-    if (code >= 0xdc00 && code <= 0xdfff) i--;
+    if (code > 0x7f && code <= 0x7ff) {
+      s++;
+    } else if (code > 0x7ff && code <= 0xffff) {
+      s += 2;
+    }
+    if (code >= 0xdc00 && code <= 0xdfff) {
+      i--;
+    }
   }
   return s;
 }
 
-export function cleanArray(actual) {
+export function cleanArray(actual: []) {
   const newArray = [];
-  for (let i = 0; i < actual.length; i++) {
+  for (const i of actual) {
     if (actual[i]) {
       newArray.push(actual[i]);
     }
@@ -122,15 +127,15 @@ export function cleanArray(actual) {
   return newArray;
 }
 
-export function param(json) {
-  if (!json) return '';
-  return cleanArray(
-    Object.keys(json).map(key => {
-      if (json[key] === undefined) return '';
-      return encodeURIComponent(key) + '=' + encodeURIComponent(json[key]);
-    })
-  ).join('&');
-}
+// export function param(json: any) {
+//   if (!json) return '';
+//   return cleanArray(
+//     Object.keys(json).map(key => {
+//       if (json[key] === undefined) return '';
+//       return encodeURIComponent(key) + '=' + encodeURIComponent(json[key]);
+//     })
+//   ).join('&');
+// }
 
 export function param2Obj(url) {
   const search = url.split('?')[1];
@@ -199,7 +204,7 @@ export const pickerOptions = [
       const start = new Date(new Date().toDateString());
       end.setTime(start.getTime());
       picker.$emit('pick', [start, end]);
-    },
+    }
   },
   {
     text: '最近一周',
@@ -208,7 +213,7 @@ export const pickerOptions = [
       const start = new Date();
       start.setTime(end.getTime() - 3600 * 1000 * 24 * 7);
       picker.$emit('pick', [start, end]);
-    },
+    }
   },
   {
     text: '最近一个月',
@@ -217,7 +222,7 @@ export const pickerOptions = [
       const start = new Date();
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
       picker.$emit('pick', [start, end]);
-    },
+    }
   },
   {
     text: '最近三个月',
@@ -226,8 +231,8 @@ export const pickerOptions = [
       const start = new Date();
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
       picker.$emit('pick', [start, end]);
-    },
-  },
+    }
+  }
 ];
 
 export function getTime(type) {
@@ -238,40 +243,40 @@ export function getTime(type) {
   }
 }
 
-export function debounce(func, wait, immediate) {
-  let timeout, args, context, timestamp, result;
+// export function debounce(func, wait, immediate) {
+//   let timeout, args, context: any, timestamp, result;
 
-  const later = function() {
-    // 据上一次触发时间间隔
-    const last = +new Date() - timestamp;
+//   const later = function() {
+//     // 据上一次触发时间间隔
+//     const last = +new Date() - timestamp;
 
-    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
-    if (last < wait && last > 0) {
-      timeout = setTimeout(later, wait - last);
-    } else {
-      timeout = null;
-      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-      if (!immediate) {
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-      }
-    }
-  };
+//     // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+//     if (last < wait && last > 0) {
+//       timeout = setTimeout(later, wait - last);
+//     } else {
+//       timeout = null;
+//       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+//       if (!immediate) {
+//         result = func.apply(context, args);
+//         if (!timeout) context = args = null;
+//       }
+//     }
+//   };
 
-  return function(...args) {
-    context = this;
-    timestamp = +new Date();
-    const callNow = immediate && !timeout;
-    // 如果延时不存在，重新设定延时
-    if (!timeout) timeout = setTimeout(later, wait);
-    if (callNow) {
-      result = func.apply(context, args);
-      context = args = null;
-    }
+//   return function(...args) {
+//     context = this;
+//     timestamp = +new Date();
+//     const callNow = immediate && !timeout;
+//     // 如果延时不存在，重新设定延时
+//     if (!timeout) timeout = setTimeout(later, wait);
+//     if (callNow) {
+//       result = func.apply(context, args);
+//       context = args = null;
+//     }
 
-    return result;
-  };
-}
+//     return result;
+//   };
+// }
 
 /**
  * This is just a simple version of deep copy
@@ -280,7 +285,7 @@ export function debounce(func, wait, immediate) {
  */
 export function deepClone(source) {
   if (!source && typeof source !== 'object') {
-    throw new Error('error arguments', 'deepClone');
+    throw new Error('error arguments');
   }
   const targetObj = source.constructor === Array ? [] : {};
   Object.keys(source).forEach(keys => {
@@ -299,15 +304,17 @@ export function uniqueArr(arr) {
 
 export function createUniqueString() {
   const timestamp = +new Date() + '';
-  const randomNum = parseInt((1 + Math.random()) * 65536) + '';
+  const randomNum = parseInt((1 + Math.random()) * 65536 + '', 10);
   return (+(randomNum + timestamp)).toString(32);
 }
 
 export function hasClass(ele, cls) {
   return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
 }
-export function addClass(ele, cls) {
-  if (!hasClass(ele, cls)) ele.className += ' ' + cls;
+export function addClass(ele, cls: any) {
+  if (!hasClass(ele, cls)) {
+    ele.className += ' ' + cls;
+  }
 }
 export function removeClass(ele, cls) {
   if (hasClass(ele, cls)) {

@@ -1,8 +1,17 @@
+import { Commit } from 'vuex';
 import { login, logout, getInfo } from '@/api/user';
 import { getToken, setToken, removeToken } from '@/utils/auth';
 import router, { resetRouter } from '@/router';
 
-const state = {
+interface StateAttr {
+  token: any;
+  name: string;
+  avatar: string;
+  introduction: string;
+  roles: string[];
+}
+
+const initState: StateAttr = {
   token: getToken(),
   name: '',
   avatar: '',
@@ -11,29 +20,29 @@ const state = {
 };
 
 const mutations = {
-  SET_TOKEN: (state, token) => {
+  SET_TOKEN: (state: StateAttr, token: string) => {
     state.token = token;
   },
-  SET_INTRODUCTION: (state, introduction) => {
+  SET_INTRODUCTION: (state: StateAttr, introduction: string) => {
     state.introduction = introduction;
   },
-  SET_NAME: (state, name) => {
+  SET_NAME: (state: StateAttr, name: string) => {
     state.name = name;
   },
-  SET_AVATAR: (state, avatar) => {
+  SET_AVATAR: (state: StateAttr, avatar: string) => {
     state.avatar = avatar;
   },
-  SET_ROLES: (state, roles) => {
+  SET_ROLES: (state: StateAttr, roles: string[]) => {
     state.roles = roles;
   }
 };
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
+  login({ commit }, userInfo: any) {
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password })
+      login({ username: username.trim(), password })
         .then(response => {
           const { data } = response;
           commit('SET_TOKEN', data.token);
@@ -47,16 +56,14 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
+  getInfo(context: { commit: Commit, state: StateAttr}) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token)
+      getInfo(context.state.token)
         .then(response => {
           const { data } = response;
-
           if (!data) {
             reject('Verification failed, please Login again.');
           }
-
           const { roles, name, avatar, introduction } = data;
 
           // roles must be a non-empty array
@@ -64,10 +71,10 @@ const actions = {
             reject('getInfo: roles must be a non-null array!');
           }
 
-          commit('SET_ROLES', roles);
-          commit('SET_NAME', name);
-          commit('SET_AVATAR', avatar);
-          commit('SET_INTRODUCTION', introduction);
+          context.commit('SET_ROLES', roles);
+          context.commit('SET_NAME', name);
+          context.commit('SET_AVATAR', avatar);
+          context.commit('SET_INTRODUCTION', introduction);
           resolve(data);
         })
         .catch(error => {
@@ -77,7 +84,7 @@ const actions = {
   },
 
   // user logout
-  logout({ commit, state }) {
+  logout({ commit }) {
     return new Promise((resolve, reject) => {
       logout()
         .then(() => {
@@ -131,7 +138,7 @@ const actions = {
 
 export default {
   namespaced: true,
-  state,
+  state: initState,
   mutations,
   actions
 };

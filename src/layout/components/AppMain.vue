@@ -8,16 +8,17 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: 'AppMain',
-  computed: {
-    cachedViews() {
-      return this.$store.state.tagsView.cachedViews
-    },
-    key() {
-      return this.$route.fullPath
-    }
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+
+const tagsView = namespace('tagsView');
+@Component
+export default class AppMain extends Vue {
+  @tagsView.State('cachedViews') private cachedViews!: any;
+
+  get key() {
+    return this.$route.fullPath;
   }
 }
 </script>
@@ -31,7 +32,7 @@ export default {
   overflow: hidden;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 
@@ -41,9 +42,8 @@ export default {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
   }
 }
 </style>
-
