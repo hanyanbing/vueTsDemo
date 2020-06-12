@@ -39,7 +39,7 @@ export default class Layout extends Vue {
       hideSidebar: this.sidebarCollapse,
       openSidebar: !this.sidebarCollapse,
       withoutAnimation: this.withoutAnimation
-    }
+    };
   }
 }
 </script>

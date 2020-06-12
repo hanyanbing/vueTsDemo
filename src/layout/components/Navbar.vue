@@ -13,7 +13,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { State, Getter, namespace } from 'vuex-class';
 
-import Hamburger from '@/components/Hamburger/index.vue'
+import Hamburger from '@/components/Hamburger/index.vue';
 
 const storeApp = namespace('app');
 const storeUser = namespace('user');

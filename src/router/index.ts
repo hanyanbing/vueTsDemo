@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Router , { RouteConfig }from 'vue-router';
+import Router, { RouteConfig } from 'vue-router';
 
 Vue.use(Router);
 
@@ -26,7 +26,12 @@ export const constantRoutes: any = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true, affix: true }
+        meta: {
+          title: 'dashboard',
+          icon: 'dashboard',
+          noCache: true,
+          affix: true
+        }
       }
     ]
   },
@@ -45,9 +50,7 @@ export const constantRoutes: any = [
   }
 ];
 
-export const asyncRoutes = [
-  nestedRouter
-];
+export const asyncRoutes = [nestedRouter];
 
 const createRouter = () =>
   new Router({

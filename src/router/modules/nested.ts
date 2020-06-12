@@ -34,13 +34,15 @@ const nestedRouter = {
           children: [
             {
               path: 'menu1-2-1',
-              component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1/index.vue'),
+              component: () =>
+                import('@/views/nested/menu1/menu1-2/menu1-2-1/index.vue'),
               name: 'Menu1-2-1',
               meta: { title: 'menu1-2-1' }
             },
             {
               path: 'menu1-2-2',
-              component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2/index.vue'),
+              component: () =>
+                import('@/views/nested/menu1/menu1-2/menu1-2-2/index.vue'),
               name: 'Menu1-2-2',
               meta: { title: 'menu1-2-2' }
             }
