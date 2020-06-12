@@ -5,11 +5,13 @@ Vue.use(Router);
 
 // /* Layout */
 import Layout from '@/layout/index.vue';
+import nestedRouter from './modules/nested';
 
 //  constantRoutes
 //  a base page that does not have permission requirements
 //  all roles can be accessed
-export const constantRoutes: RouteConfig[] = [
+// export const constantRoutes: RouteConfig[] = [
+export const constantRoutes: any = [
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -43,7 +45,9 @@ export const constantRoutes: RouteConfig[] = [
   }
 ];
 
-export const asyncRoutes = [];
+export const asyncRoutes = [
+  nestedRouter
+];
 
 const createRouter = () =>
   new Router({

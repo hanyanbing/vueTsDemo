@@ -1,49 +1,37 @@
 import Cookies from 'js-cookie';
 import { getLanguage } from '@/lang/index';
+import store from '..';
 
-interface SiderAttr {
-  opened: any;
-  withoutAnimation: boolean;
-}
 interface StateAttr {
-  sidebar: SiderAttr;
+  sidebarCollapse: any;
+  withoutAnimation: boolean;
   device: string;
   language: any;
   size: any;
 }
 
 const stateModule: StateAttr = {
-  sidebar: {
-    opened: Cookies.get('sidebarStatus')
-      ? !!Cookies.get('sidebarStatus')
-      : true,
-    withoutAnimation: false
-  },
+  sidebarCollapse: false,
+  withoutAnimation: false,
   device: 'desktop',
   language: getLanguage(),
   size: Cookies.get('size') || 'medium'
 };
 
 const getters = {
-  getToDo(state) {
+  getToDo(state: StateAttr) {
     return state.language + state.size;
   }
 };
 
 const mutations = {
   TOGGLE_SIDEBAR(state: StateAttr): void {
-    state.sidebar.opened = !state.sidebar.opened;
-    state.sidebar.withoutAnimation = false;
-    if (state.sidebar.opened) {
-      Cookies.set('sidebarStatus', '1');
-    } else {
-      Cookies.set('sidebarStatus', '0');
-    }
+    state.sidebarCollapse = !state.sidebarCollapse;
+    state.withoutAnimation = false;
   },
   CLOSE_SIDEBAR: (state: StateAttr, withoutAnimation: boolean) => {
-    Cookies.set('sidebarStatus', '0');
-    state.sidebar.opened = false;
-    state.sidebar.withoutAnimation = withoutAnimation;
+    state.sidebarCollapse = false;
+    state.withoutAnimation = withoutAnimation;
   },
   TOGGLE_DEVICE: (state: StateAttr, device: string) => {
     state.device = device;

@@ -4,7 +4,7 @@
       <el-menu
         router
         :default-active="$route.path"
-        :collapse="siderbarOpen"
+        :collapse="sidebarCollapse"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
@@ -30,18 +30,22 @@ import { State, Getter, namespace } from 'vuex-class';
 import SidebarItem from './SidebarItem.vue';
 import * as variables from '@/styles/sassvariable';
 
+const storeApp = namespace('app');
 const storePermission = namespace('permission');
 const storeSettings = namespace('settings');
+
 @Component({
   components: {
     SidebarItem
   }
 })
 export default class Sidebar extends Vue {
-  private variables: any = { ...variables };
-  @storePermission.State('routes')
-  private permissionRroutes!: object[];
+  // 左侧菜单
+  @storePermission.State('routes') private permissionRroutes!: object[];
   @storeSettings.State('sidebarLogo') private showLogo!: boolean;
-  @storeSettings.State('siderbarOpen') private siderbarOpen!: boolean;
+  // 横向展开、收起
+  @storeApp.State('sidebarCollapse') private sidebarCollapse!: boolean;
+
+  private variables: any = { ...variables };
 }
 </script>

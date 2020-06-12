@@ -1,7 +1,14 @@
 <template>
-  <div class="app-wrapper">
+  <!-- classObj, 配置sider/main_container样式、  左侧菜单展开/收起样式 -->
+  <div :class="classObj" class="app-wrapper">
+    <!-- 左侧菜单栏 -->
     <sidebar class="sidebar-container" />
+
+    <!-- 右侧主体 -->
     <div class="main-container">
+      <!-- 菜单横向展开、收起；  全屏、搜索、 个人中心、退出 -->
+      <navbar />
+
       <app-main />
     </div>
   </div>
@@ -10,20 +17,30 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
-import { Sidebar } from './components/index'; // 通过TS导入
+import { Sidebar, Navbar } from './components/index'; // 先通过ts逐个导入，再批量导入
 import AppMain from './components/AppMain.vue'; // 直接导入vue文件
 
 const app = namespace('app');
 const settings = namespace('settings');
 @Component({
   components: {
-    'sidebar': Sidebar,
-    'app-main': AppMain
+    Sidebar,
+    Navbar,
+    AppMain
   }
 })
 export default class Layout extends Vue {
-  @app.State('sidebar') private sidebar!: object;
+  @app.State('sidebarCollapse') private sidebarCollapse!: boolean;
+  @app.State('withoutAnimation') private withoutAnimation!: boolean;
   @settings.State('showSettings') private showSettings!: boolean;
+
+  get classObj() {
+    return {
+      hideSidebar: this.sidebarCollapse,
+      openSidebar: !this.sidebarCollapse,
+      withoutAnimation: this.withoutAnimation
+    }
+  }
 }
 </script>
 
