@@ -6,21 +6,24 @@
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { State, Getter, namespace } from 'vuex-class';
+import { State, Getter, Mutation, Action, namespace } from 'vuex-class';
 
 import Hamburger from '@/components/Hamburger/index.vue';
+import Breadcrumb from '@/components/Breadcrumb/index.vue';
 
 const storeApp = namespace('app');
 const storeUser = namespace('user');
 
 @Component({
   components: {
-    Hamburger
+    Hamburger,
+    Breadcrumb
   }
 })
 export default class Navbar extends Vue {
