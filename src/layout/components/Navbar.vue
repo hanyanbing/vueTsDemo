@@ -1,21 +1,37 @@
 <template>
   <div class="navbar">
+    <!-- 左侧菜单的展开、收起 -->
     <hamburger
       id="hamburger-container"
       :is-active="sidebarOpen"
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
+
+    <!-- 面包屑式 导航 -->
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    
+    <!-- 全屏、国际化、退出登录 -->
+    <div class="right-menu">
+      <template v-if="device !== 'mobile'">
+        <!-- <size-select class="right-menu-item hover-effect" /> -->
+        <!-- 国际化翻译 -->
+        <lang-select class="right-menu-item hover-effect" />
+        <!-- 全屏切换 -->
+        <screenfull class="right-menu-item hover-effect" />
+      </template>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit, Prop, Watch } from 'vue-property-decorator';
 import { State, Getter, Mutation, Action, namespace } from 'vuex-class';
 
 import Hamburger from '@/components/Hamburger/index.vue';
 import Breadcrumb from '@/components/Breadcrumb/index.vue';
+import Screenfull from '@/components/Screenfull/index.vue';
+import LangSelect from '@/components/LangSelect/index.vue'
 
 const storeApp = namespace('app');
 const storeUser = namespace('user');
@@ -23,11 +39,15 @@ const storeUser = namespace('user');
 @Component({
   components: {
     Hamburger,
-    Breadcrumb
+    Breadcrumb,
+    Screenfull,
+    LangSelect
   }
 })
 export default class Navbar extends Vue {
   @storeApp.State('sidebarOpen') private sidebarOpen: any;
+  @storeApp.State('device') private device: any;
+  
   @storeApp.Action('toggleSideBar') private toggleSideBar: any;
   @storeUser.Action('logout') private logout!: any;
 

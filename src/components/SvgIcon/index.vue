@@ -11,7 +11,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class SvgIcon extends Vue {
   @Prop({
     type: String,
-    required: true
+    // required: true
+    required: false,
+    default: ''
   })
   private iconClass!: string;
   @Prop({
@@ -23,7 +25,7 @@ export default class SvgIcon extends Vue {
   private abc: string = '#icon-guide';
 
   get iconName() {
-    return `#icon-${this.iconClass}`;
+    return this.iconClass ? `#icon-${this.iconClass}` : 'http://www.w3.org/2000/svg';
   }
   get svgClass() {
     if (this.className) {

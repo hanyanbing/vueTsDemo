@@ -78,6 +78,7 @@ export default class extends Vue {
     return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase();
   }
 
+  // 快速填充 url 字符串的参数值
   private pathCompile(path: string) {
     const { params } = this.$route;
     // compile 快速填充 url 字符串的参数值。
@@ -91,6 +92,7 @@ export default class extends Vue {
     return compile(path)(params);
   }
 
+  // 点击跳转
   private handleLink(item: any) {
     const { redirect, path } = item;
     if (redirect) {

@@ -5,14 +5,14 @@ import Cookies from 'js-cookie';
 import elementEnLocale from 'element-ui/lib/locale/lang/en.js'; // element-ui lang
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN.js'; // element-ui lang
 import elementEsLocale from 'element-ui/lib/locale/lang/es.js'; // element-ui lang
-// import enLocale from './en';
+import enLocale from './en';
 import zhLocale from './zh';
 // import esLocale from './es'
 Vue.use(VueI18n);
 
 const messages = {
   en: {
-    // ...enLocale,
+    ...enLocale,
     ...elementEnLocale
   },
   zh: {
