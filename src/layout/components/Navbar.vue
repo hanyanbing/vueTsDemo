@@ -10,7 +10,7 @@
 
     <!-- 面包屑式 导航 -->
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-    
+
     <!-- 全屏、国际化、退出登录 -->
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
@@ -31,7 +31,7 @@ import { State, Getter, Mutation, Action, namespace } from 'vuex-class';
 import Hamburger from '@/components/Hamburger/index.vue';
 import Breadcrumb from '@/components/Breadcrumb/index.vue';
 import Screenfull from '@/components/Screenfull/index.vue';
-import LangSelect from '@/components/LangSelect/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue';
 
 const storeApp = namespace('app');
 const storeUser = namespace('user');
@@ -47,7 +47,7 @@ const storeUser = namespace('user');
 export default class Navbar extends Vue {
   @storeApp.State('sidebarOpen') private sidebarOpen: any;
   @storeApp.State('device') private device: any;
-  
+
   @storeApp.Action('toggleSideBar') private toggleSideBar: any;
   @storeUser.Action('logout') private logout!: any;
 
