@@ -9,7 +9,7 @@ function hasPermission(roles: string[], route: object) {
   if ((route as any).meta && (route as any).meta.roles) {
     return roles.some(role => (route as any).meta.roles.includes(role));
   } else {
-    return true;
+    return false;
   }
 }
 
@@ -23,6 +23,7 @@ export function filterAsyncRoutes(routes: object[], roles: string[]) {
   routes.forEach(route => {
     const tmp: object = { ...route };
     if (hasPermission(roles, tmp)) {
+      // 递归
       if ((tmp as any).children) {
         (tmp as any).children = filterAsyncRoutes((tmp as any).children, roles);
       }
@@ -58,7 +59,7 @@ const actions: any = {
     return new Promise(resolve => {
       let accessedRoutes;
       if (roles.includes('admin')) {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
+        accessedRoutes = asyncRoutes;
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
       }

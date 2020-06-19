@@ -6,6 +6,7 @@ interface States {
   fixedHeader: boolean;
   sidebarLogo: boolean;
   siderbarOpen: boolean;
+  showTagsView: boolean;
 }
 
 const stateModule: States = {
@@ -13,7 +14,8 @@ const stateModule: States = {
   tagsView: true,
   fixedHeader: false,
   sidebarLogo: true,
-  siderbarOpen: false
+  siderbarOpen: false,
+  showTagsView: true
 };
 
 const mutations = {

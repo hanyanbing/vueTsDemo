@@ -20,6 +20,41 @@
         <!-- 全屏切换 -->
         <screenfull class="right-menu-item hover-effect" />
       </template>
+
+      <el-dropdown
+        class="avatar-container right-menu-item hover-effect"
+        trigger="click"
+      >
+        <div class="avatar-wrapper">
+          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/profile/">
+            <el-dropdown-item>
+              {{ $t('navbar.profile') }}
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/">
+            <el-dropdown-item>
+              {{ $t('navbar.dashboard') }}
+            </el-dropdown-item>
+          </router-link>
+          <a
+            target="_blank"
+            href="https://github.com/armour/vue-typescript-admin-template/"
+          >
+            <el-dropdown-item>
+              {{ $t('navbar.github') }}
+            </el-dropdown-item>
+          </a>
+          <el-dropdown-item divided @click.native="logoutCli">
+            <span style="display:block;">
+              {{ $t('navbar.logOut') }}
+            </span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
   </div>
 </template>
@@ -47,10 +82,12 @@ const storeUser = namespace('user');
 export default class Navbar extends Vue {
   @storeApp.State('sidebarOpen') private sidebarOpen: any;
   @storeApp.State('device') private device: any;
+  @storeUser.State('avatar') private avatar!: string;
 
   @storeApp.Action('toggleSideBar') private toggleSideBar: any;
   @storeUser.Action('logout') private logout!: any;
 
+  // 退出登录
   private async logoutCli() {
     await this.logout();
     this.$router.push(`/login?redirect=${this.$route.fullPath}`);

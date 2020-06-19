@@ -9,6 +9,9 @@
       <!-- 菜单横向展开、收起；  全屏、搜索、 个人中心、退出 -->
       <navbar />
 
+      <tags-view v-if="showTagsView" />
+
+      <!-- 右侧路由主体内容 -->
       <app-main />
     </div>
   </div>
@@ -17,22 +20,26 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+
 import { Sidebar, Navbar } from './components/index'; // 先通过ts逐个导入，再批量导入
 import AppMain from './components/AppMain.vue'; // 直接导入vue文件
+import TagsView from './components/TagsView/index.vue';
 
 const app = namespace('app');
 const settings = namespace('settings');
+
 @Component({
   components: {
     Sidebar,
     Navbar,
+    TagsView,
     AppMain
   }
 })
 export default class Layout extends Vue {
   @app.State('sidebarCollapse') private sidebarCollapse!: boolean;
   @app.State('withoutAnimation') private withoutAnimation!: boolean;
-  @settings.State('showSettings') private showSettings!: boolean;
+  @settings.State('showTagsView') private showTagsView!: boolean;
 
   get classObj() {
     return {
