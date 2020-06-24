@@ -1,5 +1,6 @@
 <template>
   <div :class="{ 'has-logo': showLogo }">
+    <sidebar-logo v-if="showLogo" :collapse="sidebarCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         router
@@ -28,6 +29,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { State, Getter, namespace } from 'vuex-class';
 
 import SidebarItem from './SidebarItem.vue';
+import SidebarLogo from './SidebarLogo.vue';
 import * as variables from '@/styles/sassvariable';
 
 const storeApp = namespace('app');
@@ -36,7 +38,8 @@ const storeSettings = namespace('settings');
 
 @Component({
   components: {
-    SidebarItem
+    SidebarItem,
+    SidebarLogo
   }
 })
 export default class Sidebar extends Vue {

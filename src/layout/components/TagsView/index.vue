@@ -4,21 +4,22 @@
       <router-link
         v-for="tag in visitedViews"
         ref="tag"
+        tag="span"
         :key="tag.path"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
       >
         <el-tag
           :key="tag.name"
-          closable
-          :type="isActive(tag) ? 'active' : ''"
-          @close="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-          >
+          :closable="!isAffix(tag)"
+          style="cursor: pointer"
+          :type="isActive(tag) ? 'active' : 'info'"
+          @close="closeSelectedTag(tag)"
+        >
           {{ $t('route.' + tag.meta.title) }}
         </el-tag>
       </router-link>
     </el-scrollbar>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -26,20 +27,17 @@ import path from 'path';
 import { Component, Vue, Emit, Prop, Watch } from 'vue-property-decorator';
 import { State, Getter, Mutation, Action, namespace } from 'vuex-class';
 import { RouteConfig } from 'vue-router';
-import ScrollPane from './ScrollPane.vue';
 
 const storePermission = namespace('permission');
 const storeTagsview = namespace('tagsView');
 
 @Component({
-  name: 'TagsView',
-  components: {
-    ScrollPane
-  }
+  name: 'TagsView'
 })
 export default class TagsView extends Vue {
   @storePermission.State('routes') private routes!: object[];
   @storeTagsview.State('visitedViews') private visitedViews!: object[];
+  @storeTagsview.Action('delView') private storeDelVistedView: any;
 
   private affixTags: object[] = [];
 
@@ -71,7 +69,7 @@ export default class TagsView extends Vue {
   }
 
   // route.meta.affix   显示带属性affix默认项
-  filterAffixTags(routes, basePath = '/') {
+  private filterAffixTags(routes, basePath = '/') {
     let tags: object[] = [];
     routes.forEach(route => {
       if (route.meta && route.meta.affix) {
@@ -95,12 +93,43 @@ export default class TagsView extends Vue {
 
   // active状态的tag
   private isActive(route: any) {
-    return route.path === this.$route.path
+    return route.path === this.$route.path;
+  }
+
+  // 判断是否可以 点击删除
+  private isAffix(tag: any) {
+    return tag.meta && tag.meta.affix;
+  }
+
+  // 删除某个访问记录
+  private closeSelectedTag(view) {
+    this.storeDelVistedView(view).then(({ visitedViews }) => {
+      this.toLastView(visitedViews, view);
+    });
+  }
+
+  // 跳转到最新路由
+  private toLastView(visitedViews, view) {
+    const latestView: any = visitedViews.slice(-1)[0];
+    if (latestView) {
+      this.$router.push(latestView.fullPath);
+    } else {
+      // now the default is to redirect to the home page if there is no tags-view,
+      // you can adjust it according to your needs.
+      if (view.name === 'Dashboard') {
+        // to reload home page
+        this.$router.replace({ path: '/redirect' + view.fullPath });
+      } else {
+        this.$router.push('/');
+      }
+    }
   }
 
   @Watch('$route')
   private onRouteChange() {
+    console.log(this.visitedViews);
     this.addTags();
+    console.log(this.visitedViews);
   }
 }
 </script>
@@ -112,23 +141,22 @@ export default class TagsView extends Vue {
 // }
 .tags-wrap {
   border-bottom: 1px solid #999;
-  height:40px;
+  height: 40px;
   padding: 5px 0;
 }
-.el-scrollbar{
+.el-scrollbar {
   height: 100%;
   text-align: left;
   .el-tag {
     margin-right: 3px;
   }
-  
 }
-.el-scrollbar__bar{
-  &.is-vertical{
-    width:100px;//滚动条宽度
+.el-scrollbar__bar {
+  &.is-vertical {
+    width: 100px; //滚动条宽度
   }
 }
-.el-scrollbar__wrap{
+.el-scrollbar__wrap {
   // overflow-y: auto;
   // overflow-x:hidden;
   overflow: hidden !important;

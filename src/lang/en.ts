@@ -12,18 +12,18 @@ export default {
     'menu2': 'menu2'
   },
   navbar: {
-    'logOut': 'Log Out',
-    'dashboard': 'Dashboard',
-    'github': 'Github',
-    'theme': 'Theme',
-    'size': 'Global Size',
-    'profile': 'Profile'
+    logOut: 'Log Out',
+    dashboard: 'Dashboard',
+    github: 'Github',
+    theme: 'Theme',
+    size: 'Global Size',
+    profile: 'Profile'
   },
   login: {
     title: 'Login Form',
     logIn: 'Login',
     username: 'Username',
-    password: 'Password',
+    password: 'Password'
   },
   guide: {
     description:

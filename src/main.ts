@@ -17,7 +17,7 @@ import '../mock/index'; // mock数据
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
-  i18n: (key: string, value: string) => i18n.t(key, value),
+  i18n: (key: any, value: any) => i18n.t(key, value),
 });
 
 Vue.config.productionTip = false;
