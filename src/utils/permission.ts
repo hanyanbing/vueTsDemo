@@ -19,7 +19,6 @@ export default function checkPermission(value) {
     }
     return true;
   } else {
-    // console.log(`need roles! Like v-permission="['admin','editor']"`)
     return false;
   }
 }

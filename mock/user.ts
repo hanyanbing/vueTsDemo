@@ -1,4 +1,3 @@
-import { param2Obj } from '../src/utils/index';
 
 const tokens = {
   admin: {
@@ -55,11 +54,10 @@ export default [
     url: '/user/info',
     type: 'get',
     response: config => {
-      const { token } = param2Obj(config.url);
-      const info = users[token];
+      const token = config.url.split('=')[1];
 
       // mock error
-      if (!info) {
+      if (!token) {
         return {
           code: 50008,
           message: 'Login failed, unable to get user details.'
@@ -68,7 +66,7 @@ export default [
 
       return {
         code: 20000,
-        data: info
+        data: users[token]
       };
     }
   },

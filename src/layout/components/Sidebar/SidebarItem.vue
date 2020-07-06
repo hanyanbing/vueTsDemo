@@ -32,7 +32,7 @@
         >
           <svg-icon
             v-if="onlyOneChild.meta && onlyOneChild.meta.icon"
-            :icon-class="onlyOneChild.meta.title"
+            :icon-class="onlyOneChild.meta.icon"
           ></svg-icon>
           <span slot="title" v-if="onlyOneChild.meta.title">
             {{ $t('route.' + onlyOneChild.meta.title) }}

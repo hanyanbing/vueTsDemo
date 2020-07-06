@@ -7,7 +7,6 @@
   "rules": {
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
-    "quote-props":[0, "always"],
     "interface-name": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,

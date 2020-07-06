@@ -110,7 +110,9 @@ export default class TagsView extends Vue {
 
   // 跳转到最新路由
   private toLastView(visitedViews, view) {
+    // 取最后一个
     const latestView: any = visitedViews.slice(-1)[0];
+    // 如果存在，就跳转
     if (latestView) {
       this.$router.push(latestView.fullPath);
     } else {
@@ -127,9 +129,7 @@ export default class TagsView extends Vue {
 
   @Watch('$route')
   private onRouteChange() {
-    console.log(this.visitedViews);
     this.addTags();
-    console.log(this.visitedViews);
   }
 }
 </script>

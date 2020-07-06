@@ -29,7 +29,7 @@ export default class Hamburger extends Vue {
 
   @Emit('toggleClick')
   private toggleClick() {
-    console.log('aaaaaaaa');
+    console.log(11111111);
   }
 }
 </script>

@@ -85,7 +85,6 @@ export default class LoginEdit extends Vue {
         this.loading = true;
         this.loginAction(this.loginForm)
           .then(() => {
-            console.log(this.$route, this.$route.params);
             this.$router.push({ path: (this.$route as any).query.redirect });
             this.loading = false;
           })

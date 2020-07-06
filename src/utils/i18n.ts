@@ -5,7 +5,6 @@ export default function(this: any, title: string) {
   if (hasKey) {
     // $t :this method from vue-i18n, inject in @/lang/index.js
     const translatedTitle = this.$t('route.' + title);
-    console.log(translatedTitle);
     return translatedTitle;
   }
   return title;

@@ -66,7 +66,6 @@ export default class extends Vue {
     this.breadcrumbs = matched.filter(item => {
       return item.meta && item.meta.title && item.meta.breadcrumb !== false;
     });
-    console.log(this.breadcrumbs);
   }
 
   // 判断是否 为Dashboard首页

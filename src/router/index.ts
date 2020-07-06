@@ -6,6 +6,7 @@ Vue.use(Router);
 // /* Layout */
 import Layout from '@/layout/index.vue';
 import nestedRouter from './modules/nested';
+import tableRouter from './modules/table';
 
 //  constantRoutes
 //  a base page that does not have permission requirements
@@ -50,7 +51,27 @@ export const constantRoutes: any = [
   }
 ];
 
-export const asyncRoutes = [nestedRouter];
+export const asyncRoutes = [
+  {
+    path: '/icon',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () =>
+          import(/* webpackChunkName: "icons" */ '@/views/icons/index.vue'),
+        name: 'Icons',
+        meta: {
+          title: 'icons',
+          icon: 'icon',
+          noCache: true
+        }
+      }
+    ]
+  },
+  tableRouter,
+  nestedRouter
+];
 
 const createRouter = () =>
   new Router({
