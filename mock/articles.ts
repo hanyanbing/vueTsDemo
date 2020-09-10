@@ -34,14 +34,15 @@ for (let i = 0; i < count; i++) {
 
 export default [
   {
-    url: '/articles',
+    url: '/article/list',
     type: 'get',
     response: () => {
+      const len = parseInt((10 * Math.random()) as any, 10);
       return {
         code: 20000,
         data: {
-          total: List.length,
-          items: List
+          total: len,
+          items: List.slice(0, len)
         }
       };
     }

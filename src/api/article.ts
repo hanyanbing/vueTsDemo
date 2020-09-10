@@ -61,7 +61,7 @@ export function updateArticle(data) {
 
 export const getArticles = (params: any) =>
   request({
-    url: '/articles',
+    url: '/article/list',
     method: 'get',
     params
   });

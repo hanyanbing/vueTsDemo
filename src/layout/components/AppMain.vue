@@ -2,6 +2,8 @@
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
+        <!-- 加上key,强制不复用组件 -->
+        <!-- beforeRouteUpdate => created => mounted -->
         <router-view :key="key" />
       </keep-alive>
     </transition>

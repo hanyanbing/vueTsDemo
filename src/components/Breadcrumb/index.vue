@@ -86,8 +86,8 @@ export default class extends Vue {
     // var url = '/user/:id/:name'
     // var data = {id: 10001, name: 'bob'}
     // console.log(pathToRegexp.compile(url)(data))
-
     // 打印结果  /user/10001/bob
+
     return compile(path)(params);
   }
 

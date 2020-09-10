@@ -15,6 +15,10 @@ export default {
     'draggableTable': '拖拽 Table',
     'inlineEditTable': 'Table 内编辑',
     'complexTable': '综合 Table',
+    'Tab': 'Tab',
+    'zip': 'Zip',
+    'pdf': 'PDF',
+    'exportZip': '导出 Zip',
     'icons': '图标'
   },
   navbar: {

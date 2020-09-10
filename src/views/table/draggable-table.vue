@@ -11,10 +11,10 @@
       highlight-current-row
       style="width: 100%"
     >
-      <el-table-column align="center" label="ID" width="65">
-        <template slot-scope="{ row }">
+      <el-table-column prop="id" align="center" label="ID" width="65">
+        <!-- <template slot-scope="{ row }">
           <span>{{ row.id }}</span>
-        </template>
+        </template> -->
       </el-table-column>
 
       <el-table-column width="180px" align="center" label="Date">
