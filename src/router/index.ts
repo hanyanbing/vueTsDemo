@@ -82,7 +82,23 @@ export const asyncRoutes = [
     ]
   },
   tableRouter,
-  nestedRouter
+  nestedRouter,
+  {
+    path: '/theme',
+    component: Layout,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'index',
+        component: () => import(/* webpackChunkName: "theme" */ '@/views/theme/index.vue'),
+        name: 'Theme',
+        meta: {
+          title: 'theme',
+          icon: 'theme'
+        }
+      }
+    ]
+  },
 ];
 
 const createRouter = () =>

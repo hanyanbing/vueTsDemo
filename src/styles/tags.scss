@@ -1,0 +1,27 @@
+.tags-wrap {
+  border-bottom: 1px solid #999;
+  height: 40px;
+  padding: 5px 0;
+  .el-scrollbar {
+    text-align: left;
+    width: 100%;
+    .el-tag {
+      margin-right: 3px;
+      display: inline-block;
+    }
+  }
+  .el-scrollbar__bar {
+    &.is-vertical {
+      width: 100px; //滚动条宽度
+    }
+  }
+  .scrollbar-wrapper {
+    overflow-y: hidden !important;
+    position: relative;
+    .el-scrollbar__view {
+      // width: 100%;
+      white-space: nowrap;
+    }
+  }
+  // 使用elementUI滚动条之横向滚动       cnblogs.com/wangjae/p/10340757.html
+}

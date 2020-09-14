@@ -20,6 +20,7 @@ $--border-color-lighter: #e6ebf5;
 
 $--table-border:1px solid#dfe6ec;
 
+// 在.scss文件中引入elementUI样式文件，如果是相对路径，前面要加‘~’
 /* icon font path, required */
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';

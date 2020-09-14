@@ -1,6 +1,6 @@
 <template>
   <div class="tags-wrap">
-    <el-scrollbar>
+    <el-scrollbar wrap-class="scrollbar-wrapper">
       <router-link
         v-for="tag in visitedViews"
         ref="tag"
@@ -133,32 +133,3 @@ export default class TagsView extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-// .scroll {
-//   height: 100px;
-//   overflow-y: hidden;
-// }
-.tags-wrap {
-  border-bottom: 1px solid #999;
-  height: 40px;
-  padding: 5px 0;
-}
-.el-scrollbar {
-  height: 100%;
-  text-align: left;
-  .el-tag {
-    margin-right: 3px;
-  }
-}
-.el-scrollbar__bar {
-  &.is-vertical {
-    width: 100px; //滚动条宽度
-  }
-}
-.el-scrollbar__wrap {
-  // overflow-y: auto;
-  // overflow-x:hidden;
-  overflow: hidden !important;
-}
-</style>
