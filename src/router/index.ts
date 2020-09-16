@@ -90,7 +90,8 @@ export const asyncRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import(/* webpackChunkName: "theme" */ '@/views/theme/index.vue'),
+        component: () =>
+          import(/* webpackChunkName: "theme" */ '@/views/theme/index.vue'),
         name: 'Theme',
         meta: {
           title: 'theme',
@@ -98,7 +99,7 @@ export const asyncRoutes = [
         }
       }
     ]
-  },
+  }
 ];
 
 const createRouter = () =>

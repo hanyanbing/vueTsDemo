@@ -105,6 +105,10 @@ export default class extends Vue {
   private onThemeChange() {
     toggleClass(document.body, 'custom-theme');
   }
+
+  // @Watch('person', { immediate: true, deep: true })
+  //   onPersonChanged(val: Person, oldVal: Person) { }
+  // }
 }
 </script>
 
