@@ -20,6 +20,7 @@ export default {
     'pdf': 'PDF',
     'exportZip': '导出 Zip',
     'theme': '换肤',
+    'form': '表单',
     'icons': '图标'
   },
   navbar: {

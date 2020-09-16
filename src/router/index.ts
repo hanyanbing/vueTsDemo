@@ -99,6 +99,23 @@ export const asyncRoutes = [
         }
       }
     ]
+  },
+  {
+    path: '/form',
+    component: Layout,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'index',
+        component: () =>
+          import(/* webpackChunkName: "theme" */ '@/views/form/index.vue'),
+        name: 'Form',
+        meta: {
+          title: 'form',
+          icon: 'form'
+        }
+      }
+    ]
   }
 ];
 
