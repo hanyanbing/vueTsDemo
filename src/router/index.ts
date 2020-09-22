@@ -116,6 +116,23 @@ export const asyncRoutes = [
         }
       }
     ]
+  },
+  {
+    path: '/slot',
+    component: Layout,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'index',
+        component: () =>
+          import(/* webpackChunkName: "theme" */ '@/views/slot/index.vue'),
+        name: 'Slot',
+        meta: {
+          title: 'slot',
+          icon: 'form'
+        }
+      }
+    ]
   }
 ];
 

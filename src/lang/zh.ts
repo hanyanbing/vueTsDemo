@@ -21,6 +21,7 @@ export default {
     'exportZip': '导出 Zip',
     'theme': '换肤',
     'form': '表单',
+    'slot': '插槽',
     'icons': '图标'
   },
   navbar: {
