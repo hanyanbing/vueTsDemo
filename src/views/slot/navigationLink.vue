@@ -1,6 +1,6 @@
 <template>
-  <div style="padding:15px 30px 0;">
-    {{title}}: <br>
+  <div style="padding-bottom:30px;">
+    <strong>{{title}}</strong>: <br>
     <slot>这是子组件中的后备内容</slot>
   </div>
 </template>
