@@ -22,6 +22,7 @@ export default {
     'theme': '换肤',
     'form': '表单',
     'slot': '插槽',
+    'i18n': '国际化',
     'icons': '图标'
   },
   navbar: {

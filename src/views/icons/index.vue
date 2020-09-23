@@ -20,7 +20,8 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Element-UI Icons">
+
+      <el-tab-pane>
         <div class="grid">
           <div
             v-for="item of elementIcons"

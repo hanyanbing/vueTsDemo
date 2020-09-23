@@ -1,16 +1,16 @@
 <template>
   <div class="slot-container">
-    <navigation-link :title="'默认插槽'">
+    <default-slot :title="'默认插槽'">
       当组件渲染的时候，slot将会被替换为“Your
       Profile”。插槽内可以包含任何模板代码 <br />
       甚至其它的组件: <svg-icon :icon-class="'clipboard'" /> <br />
-      如果 navigation-link 的 template 中没有包含一个 slot
+      如果 default-slot 的 template 中没有包含一个 slot
       元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃。
-    </navigation-link>
+    </default-slot>
 
-    <navigation-link
+    <default-slot
       :title="'后备内容-->父级组件中不提供任何插槽内容时,后备内容将会被渲染'"
-    ></navigation-link>
+    ></default-slot>
 
 
     <!-- 具名插槽 -->
@@ -91,14 +91,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import navigationLink from './navigationLink.vue';
+import defaultSlot from './defaultSlot.vue';
 import hasnameSlot from './hasnameSlot.vue';
 import areaSlot from './areaSlot.vue';
 import areaManySlot from './areaManySlot.vue';
 
 @Component({
   components: {
-    navigationLink,
+    defaultSlot,
     hasnameSlot,
     areaSlot,
     areaManySlot

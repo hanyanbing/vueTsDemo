@@ -133,11 +133,38 @@ export const asyncRoutes = [
         }
       }
     ]
+  },
+  {
+    path: '/i18n',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () =>
+          import(
+            /* webpackChunkName: "i18n-demo" */ '@/views/i18n-demo/index.vue'
+          ),
+        name: 'I18n',
+        meta: {
+          title: 'i18n',
+          icon: 'international'
+        }
+      }
+    ]
   }
 ];
 
 const createRouter = () =>
   new Router({
+    // mode: 'history',  // Disabled due to Github Pages doesn't support this, enable this if you need.
+    scrollBehavior: (to, from, savedPosition) => {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        return { x: 0, y: 0 };
+      }
+    },
+    base: process.env.BASE_URL,
     routes: constantRoutes
   });
 
