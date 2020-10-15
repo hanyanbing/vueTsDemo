@@ -29,12 +29,19 @@ module.exports = {
     // hot: true
 
     // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
+    // '/api' 为匹配项，target 为被请求的地址，因为在 ajax 的 url 中加了前缀 '/api'，
+    // 而原本的接口是没有这个前缀的，所以需要通过 pathRewrite 来重写地址，将前缀 '/api' 转为 '/'。
+    // 如果本身的接口地址就有 '/api' 这种通用前缀，就可以把 pathRewrite 删掉。
     // proxy: {
     //   // 配置多个代理
     //   '/api': {
-    //     target: '<url>',
+    //     target: 'http://xxxxxx.com', // 接口的域名
+    //     secure: false,  // 如果是https接口，需要配置这个参数
     //     ws: true,
-    //     changeOrigin: true
+    //     changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+    //      pathRewrite: {
+    //      '^/api': ''
+    //      }
     //   },
     //   '/foo': {
     //     target: '<other_url>'
@@ -45,14 +52,15 @@ module.exports = {
   // 在设置了vue.config.js之后，就不会生成map文件
   // map文件的作用在于：项目打包后，代码都是经过压缩加密的，如果运行时报错，输出的错误信息无法准确得知是哪里的代码报错。
   // 也就是说map文件相当于是查看源码的一个东西。如果不需要定位问题，并且不想被看到源码，
-  // 就把productionSourceMap 置为false，既可以减少包大小，也可以加密源码。
-  productionSourceMap: false,
+  // 就把productionSourceMap 置为false，既可以大大减少包大小，也可以加密源码。
+  // productionSourceMap: false,
 
   //   lintOnSave：{ type:Boolean default:true } 问你是否使用eslint
   lintOnSave: true,
 
   chainWebpack: config => {
     // https://www.cnblogs.com/ttjm/p/11724230.html
+    // npm run build --report // 直接运行，然后在浏览器打开http://127.0.0.1:8888/即可查看复制代码
     // 配置webpack-bundle-analyzer
     // 打包文件可视化
     // config

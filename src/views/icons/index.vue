@@ -21,7 +21,7 @@
         </div>
       </el-tab-pane>
 
-      <el-tab-pane>
+      <!-- <el-tab-pane label="Icons1"> -->
         <div class="grid">
           <div
             v-for="item of elementIcons"
@@ -39,7 +39,7 @@
             </el-tooltip>
           </div>
         </div>
-      </el-tab-pane>
+      <!-- </el-tab-pane> -->
     </el-tabs>
   </div>
 </template>

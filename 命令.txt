@@ -1,4 +1,4 @@
-尾部是否需要分号， tslint.json
+﻿尾部是否需要分号， tslint.json
 "semicolon": [
       false,
       "always"
@@ -6,3 +6,9 @@
 
 
 https://segmentfault.com/a/1190000014230857
+
+
+在 .gitignore 文件，添加static/mock:
+
+目的以后在提交代码的时候既不会提交到本地git仓库中也不会提交到线上git仓库中；
+
