@@ -14,7 +14,8 @@ module.exports = {
   // devServer:{type:Object} 3个属性host,port,https
   // 它支持webPack-dev-server的所有选项
   devServer: {
-    overlay: { // 让浏览器 overlay 同时显示警告和错误
+    overlay: {
+      // 让浏览器 overlay 同时显示警告和错误
       warnings: true,
       errors: true
     },
@@ -22,10 +23,10 @@ module.exports = {
     port: port, // 代理断就
     https: false,
     // 添加热更新
-    host: "localhost"
+    host: 'localhost'
     // hot 和 hotOnly 的区别是在某些模块不支持热更新的情况下，
     // 前者会自动刷新页面，后者不会刷新页面，而是在控制台输出热更新失败
-    // hotOnly: false, // 热更新 
+    // hotOnly: false, // 热更新
     // hot: true
 
     // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
@@ -46,7 +47,7 @@ module.exports = {
     //   '/foo': {
     //     target: '<other_url>'
     //   }
-    // }  
+    // }
   },
 
   // 在设置了vue.config.js之后，就不会生成map文件
@@ -59,13 +60,38 @@ module.exports = {
   lintOnSave: true,
 
   chainWebpack: config => {
+  //   config.optimization.splitChunks(
+  //     {
+  //       chunks: 'all', // async表示抽取异步模块，all表示对所有模块生效，initial表示对同步模块生效
+  //       cacheGroups: {
+  //         vendors: {
+  //           // 抽离第三方插件
+  //           test: /[\\/]node_modules[\\/]/, // 指定是node_modules下的第三方包
+  //           name: 'vendors',
+  //           priority: -10 // 抽取优先级
+  //         },
+  //         utilCommon: {
+  //           // 抽离自定义工具库
+  //           name: 'common',
+  //           minSize: 0, // 将引用模块分离成新代码文件的最小体积
+  //           minChunks: 2, // 表示将引用模块如不同文件引用了多少次，才能分离生成新chunk
+  //           priority: -20
+  //         }
+  //       }
+  //     },
+  //     // 为 webpack 运行时代码创建单独的chunk
+  //     {
+  //       runtimeChunk: {name: 'manifest' }
+  //     }
+  //   ),
+
     // https://www.cnblogs.com/ttjm/p/11724230.html
     // npm run build --report // 直接运行，然后在浏览器打开http://127.0.0.1:8888/即可查看复制代码
     // 配置webpack-bundle-analyzer
     // 打包文件可视化
-    // config
-    //   .plugin('webpack-bundle-analyzer')
-    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))

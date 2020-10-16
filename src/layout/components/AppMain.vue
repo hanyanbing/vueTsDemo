@@ -4,7 +4,7 @@
       <keep-alive :include="cachedViews">
         <!-- 加上key,强制不复用组件 -->
         <!-- beforeRouteUpdate => created => mounted -->
-        <router-view :key="key" />
+        <router-view :key="key"/>
       </keep-alive>
     </transition>
   </section>
